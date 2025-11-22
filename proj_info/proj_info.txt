@@ -1,1 +1,335 @@
 
+=====================================================================================
+
+   PRODUCTION
+
+=====================================================================================
+
+
+auth.net
+
+https://partner.authorize.net/widget/widget/RINT/SPA#/Login
+
+user: BECPS1
+pass: ANrfl12gnk!!
+
+
+Adding user:
+
+budubasa@gmail.com
+
+user: extempore66
+pass: theUsualExtended
+
+
+https://developer.authorize.net/api.html
+https://developer.authorize.net/api/reference/features/payment-transactions.html
+https://developer.authorize.net/api/reference/index.html#payment-transactions
+
+
+
+
+Sooooo, for the API and Development:
+
+API Login ID:  43WyPk5z
+API Key:       7z79d26J925UCrAm
+
+
+
+
+To create payments and returns (refunds) through the Authorize.net API, you need to use the API credentials (API Login ID and API Key) and integrate with the relevant API endpoints. As a developer or technology partner, you should:
+
+Obtain your API credentials by signing in to the Partner Interface, navigating to Account > Integrations > API Key, and copying your API Login ID and API Key.
+For payments, use the 'createTransactionRequest' endpoint to process transactions such as credit card payments.
+For returns (refunds), use the 'createTransactionRequest' endpoint with the transactionType set to 'refundTransaction'.
+If you want to use OAuth for authentication, register your application in the Partner Interface under Account > Integrations > OAuth Applications, and follow the OAuth flow to obtain access tokens.
+Refer to the Boarding API Developer Guide and OAuth Developer Guide for detailed API documentation and integration steps.
+You can find more details and step-by-step instructions in the provided developer guides:
+
+Boarding API Developer Guide: https://www.authorize.net/content/dam/documents/en/mb-guide.pdf
+OAuth Developer Guide: https://developer.authorize.net/api/reference/features/oauth.html
+
+
+
+
+https://developer.authorize.net/api.html
+
+=====================================================================================
+
+   TEST AND DEVELOPMENT
+
+=====================================================================================
+
+Very important: for testing and sandbox authorize.net is using a completely different portal: 
+https://logintest.authorize.net/
+
+userid: extempore67
+pass: theUsualExtended
+
+API Login ID:  3LLm9wCb97a
+API Key:       3sS78b4mUA5t325w
+
+Documentation:
+https://developer.authorize.net/api.html
+https://developer.authorize.net/api/reference/features/payment-transactions.html
+https://developer.authorize.net/api/reference/index.html#payment-transactions
+
+
+
+
+Example curl:
+
+curl --request POST \
+  --url https://apitest.authorize.net/xml/v1/request.api \
+  --header 'Content-Type: application/json' \
+  --data '{ 
+    "createTransactionRequest": { 
+        "merchantAuthentication": { 
+            "name": "3LLm9wCb97a", 
+            "transactionKey": "3sS78b4mUA5t325w" 
+        },
+        "refId": "123456",
+        "transactionRequest": {
+            "transactionType": "authCaptureTransaction",
+            "amount": "5",
+            "payment": {
+                "creditCard": {
+                    "cardNumber": "5424000000000015",
+                    "expirationDate": "2025-12",
+                    "cardCode": "999"
+                }
+            }
+        }
+    }
+}'
+
+SAme as above w different amount:
+
+curl --request POST \
+  --url https://apitest.authorize.net/xml/v1/request.api \
+  --header 'Content-Type: application/json' \
+  --data '{ 
+    "createTransactionRequest": { 
+        "merchantAuthentication": { 
+            "name": "3LLm9wCb97a", 
+            "transactionKey": "3sS78b4mUA5t325w" 
+        },
+        "refId": "654321",
+        "transactionRequest": {
+            "transactionType": "authCaptureTransaction",
+            "amount": "12.95",
+            "payment": {
+                "creditCard": {
+                    "cardNumber": "5424000000000015",
+                    "expirationDate": "2025-12",
+                    "cardCode": "999"
+                }
+            }
+        }
+    }
+}'
+
+Response:
+
+{"transactionResponse":{"responseCode":"1","authCode":"N9S6W3","avsResultCode":"Y","cvvResultCode":"P","cavvResultCode":"2","transId":"120073862125","refTransID":"","transHash":"","testRequest":"0","accountNumber":"XXXX0015","accountType":"MasterCard","messages":[{"code":"1","description":"This transaction has been approved."}],"transHashSha2":"","SupplementalDataQualificationIndicator":0,"networkTransId":"MXBO1QO07BHQX49EFTK2L85"},"refId":"123456","messages":{"resultCode":"Ok","message":[{"code":"I00001","text":"Successful."}]}}
+
+
+
+
+
+Work session
+
+======================
+
+
+https://www.flexipay.com.co/p/developers
+
+URL https://tran-dev.flexipay.com.co/api/transaccion
+Content-Type application/json
+
+apiKeyComercio 92977913-7673-4155-a7c3-75b4aa23718f
+usuarioComercio: INFOFINTECHTEST1
+contrasenaComercio: OTAxNzY2NzU3MXQ=
+terminalComercio: 000BB6C8
+
+BODY
+
+Field *
+
+Data
+Type Description
+idCuenta Yes Int 83
+
+
+Virtual terminal 
+
+Username: test-Infofintech
+Password: iywyig7fe7%R
+
+
+========================================================
+
+Example as per FlexiPay:
+
+========================================================
+
+curl --location 'https://tran-dev.flexipay.com.co/api/transaccion/comercio-transaccion-comercio' \
+--header 'apiKeyComercio: 3a007c2f-dc90-4e23-ada8-e8d43e18681d' \
+--header 'usuarioComercio: FLUME8' \
+--header 'contrasenaComercio: OTAxNzU1NzY2OGU=' \
+--header 'terminalComercio: 34862' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "anoTarjetaComercio": 2026,
+    "mesTarjetaComercio": 5,
+    "numeroTarjetaComercio": "4000100000000000",
+    "idFranquiciaComercio": "9|01|Visa",
+    "cvv2": "",
+    "ciudadPagoComercio": "Cali Colombia",
+    "codreferenciaPagoComercio": "c2b95692",
+    "compradorPagoComercio": "Jane Jones",
+    "descripcionPagoComercio": "Buy BTC 0.0003213",
+    "emailCompraComercio": "mailto:donnak.bates@sbcglobal.net",
+    "idCuenta": 82,
+    "idMedioPagoComercio": 353,
+    "idTipoCuenta": "345|C|Credito",
+    "idTipoDocumentoComercio": 521,
+    "idTipoTransaccionComercio": "339|CREDIBANCO|CREDIBANCO",
+    "ivaPagoComercio": 0,
+    "mcc": "mcc de validacion que se llenara con datos de visa",
+    "montoPagoComercio": "92.00",
+    "numcuotasPagoComercio": 0,
+    "numeroDocumentoCompraComercio": "9780",
+    "numeroFacturaComercio": "9780",
+    "telefonoCompraComercio": "8178255325",
+    "valorTotalComercio": 92.00
+}'
+
+
+Response:
+{"numAutorizacion":null,"msgResp":null,"numRecibo":"2000000001317163","idTransacionComercio":5880,"mensajeRespuesta":"API Key is not valid for terminal 34862"}
+
+========================================================
+
+Example as per FlexiPay with Bryan's credentials
+
+========================================================
+
+curl --location 'https://tran-dev.flexipay.com.co/api/transaccion/comercio-transaccion-comercio' \
+--header 'apiKeyComercio: 92977913-7673-4155-a7c3-75b4aa23718f' \
+--header 'usuarioComercio: INFOFINTECHTEST1' \
+--header 'contrasenaComercio: OTAxNzY2NzU3MXQ=' \
+--header 'terminalComercio: 000BB6C8' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "anoTarjetaComercio": 2026,
+    "mesTarjetaComercio": 5,
+    "numeroTarjetaComercio": "4000100000000000",
+    "idFranquiciaComercio": "9|01|Visa",
+    "cvv2": "",
+    "ciudadPagoComercio": "Cali Colombia",
+    "codreferenciaPagoComercio": "c2b95692",
+    "compradorPagoComercio": "Jane Jones",
+    "descripcionPagoComercio": "Buy BTC 0.0003213",
+    "emailCompraComercio": "mailto:donnak.bates@sbcglobal.net",
+    "idCuenta": 82,
+    "idMedioPagoComercio": 353,
+    "idTipoCuenta": "345|C|Credito",
+    "idTipoDocumentoComercio": 521,
+    "idTipoTransaccionComercio": "339|CREDIBANCO|CREDIBANCO",
+    "ivaPagoComercio": 0,
+    "mcc": "mcc de validacion que se llenara con datos de visa",
+    "montoPagoComercio": "92.00",
+    "numcuotasPagoComercio": 0,
+    "numeroDocumentoCompraComercio": "9780",
+    "numeroFacturaComercio": "9780",
+    "telefonoCompraComercio": "8178255325",
+    "valorTotalComercio": 92.00
+}'
+
+Response:
+
+La cuenta ingresada no corresponde a la cuenta de comercio
+
+
+========================================================
+
+
+Example request:
+
+curl  --request POST  --url https://tran-dev.flexipay.com.co/api/transaccion/comercio-transaccion-comercio \
+--header 'apiKeyComercio: 3a007c2f-dc90-4e23-ada8-e8d43e18681d' \
+--header 'usuarioComercio: FLUME8' \
+--header 'contrasenaComercio: OTAxNzU1NzY2OGU=' \
+--header 'terminalComercio: 34862' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "anoTarjetaComercio": 2026,
+    "mesTarjetaComercio": 5,
+    "numeroTarjetaComercio": "4000100000000000",
+    "idFranquiciaComercio": "9|01|Visa",
+    "cvv2": "",
+    "ciudadPagoComercio": "Cali Colombia",
+    "codreferenciaPagoComercio": "c2b95692",
+    "compradorPagoComercio": "Jane Jones",
+    "descripcionPagoComercio": "Buy BTC 0.0003213",
+    "emailCompraComercio": "mailto:donnak.bates@sbcglobal.net",
+    "idCuenta": 82,
+    "idMedioPagoComercio": 353,
+    "idTipoCuenta": "345|C|Credito",
+    "idTipoDocumentoComercio": 521,
+    "ivaPagoComercio": 0,
+    "mcc": "mcc de validacion que se llenara con datos de visa",
+    "montoPagoComercio": "92.00",
+    "valorTotalComercio": 92.00
+}'
+
+Response:
+
+{"numAutorizacion":null,"msgResp":null,"numRecibo":"1000000001319809","idTransacionComercio":5884,"mensajeRespuesta":"API Key is not valid for terminal 34862"}%
+
+
+
+If we take out these fields the transaction still goes through with the same response as above
+
+    "idTipoTransaccionComercio": "339|CREDIBANCO|CREDIBANCO",
+    "numcuotasPagoComercio": 0,
+    "numeroDocumentoCompraComercio": "9780",
+    "numeroFacturaComercio": "9780",
+    "telefonoCompraComercio": "8178255325",
+
+
+
+If we take out this field:
+
+    "idTipoDocumentoComercio": 521,
+
+The response is very interesting: 
+{"p_codigo":-99,"p_mesaje":"insert or update on table \"transaccion_comercio\" violates foreign key constraint "fk_tipo_documento_transaccion\""}%
+
+... which indicates that idTipoDocumentoComercio goes hand in hand / is referenced by some of the other fields
+like idTipoCuenta or idMedioPagoComercio or idCuenta or codreferenciaPagoComercio
+
+Must talk to Bryan and sort out the value of these fields for each client or for Bryan as a Merchant
+
+
+
+=====================================================================================
+
+   TEST OF THE MAPPING SERVER / FUNCTIONALITY
+
+=====================================================================================
+curl  --request POST  --insecure  --url https://localhost/auth_flexi_map_and_pay \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "key_1": "val_1",
+    "key_2": "val_2"
+}'
+
+curl  --request POST  --insecure  --url https://67.254.128.64/auth_flexi_map_and_pay \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "key_1": "val_1",
+    "key_2": "val_2"
+}'
+
