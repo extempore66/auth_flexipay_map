@@ -45,6 +45,10 @@ let options = {
     //ca: fs.readFileSync('./certs/buybytoken_com.ca-bundle')
 };
 
+const credentials = fs.readFileSync('./certs/credentials');
+const credentials_array = credentials.toString().split('\n');
+console.log(credentials_array);
+
 https.createServer(options, app).listen( secPort, () => {console.log(`Server listening on port ${secPort} `)}  );
 
 //-----------------------------------------------------------------------------------------
@@ -65,7 +69,19 @@ app.post("/auth_flexi_map_and_pay", async (req, res) => {
     // "card_number":"4242424242424242","card_exp_month":"11","card_exp_year":"28","card_holder_name":"RaquelWelch"}},
     // "billing":{"address":{"city":"Astoria","first_name":"Raquel","last_name":"Welch","line1":"15-38 Steinway St","line2":"Apt 25","state":"NY","zip":"10019"},
     // "email":"sample_email@test-domain.com"}} 
-    let prom = createWorker(req.body, '', "./worker_payment");
+
+    const worker_params = {
+        "credentials": {
+            "apiKeyComercio": credentials_array[0],
+            "usuarioComercio": credentials_array[1],
+            "contrasenaComercio": credentials_array[2],
+            "terminalComercio": credentials_array[3],
+            "idCuenta": credentials_array[4]
+        },
+        "request_body": req.body
+    }
+
+    let prom = createWorker(worker_params, '', "./worker_payment");
     prom.then( function (retResults){
         retBuffer = retResults; 
         let retObj = JSON.parse(retResults);

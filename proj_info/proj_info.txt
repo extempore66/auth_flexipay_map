@@ -264,7 +264,7 @@ curl --location 'https://tran-dev.flexipay.com.co/api/transaccion/comercio-trans
     "mesTarjetaComercio": 5,
     "numeroTarjetaComercio": "4000100000000000",
     "idFranquiciaComercio": "9|01|Visa",
-    "cvv2": "",
+    "cvv2": "123",
     "ciudadPagoComercio": "Cali Colombia",
     "codreferenciaPagoComercio": "c2b95692",
     "compradorPagoComercio": "Jane Jones",
@@ -580,3 +580,22 @@ curl  --request POST  --insecure  --url https://67.254.128.64/auth_flexi_map_and
     "key_1": "val_1",
     "key_2": "val_2"
 }'
+
+
+curl  --request POST  --insecure  --url https://localhost/auth_flexi_map_and_pay \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "createTransactionRequest": {
+        "transactionRequest": {
+            "amount": "5",
+            "payment": {
+                "creditCard": {
+                    "cardNumber": "4000100000000000",
+                    "expirationDate": "2026-05",
+                    "cardCode": "123"
+                }
+            }
+        }
+    }
+}' 
+
