@@ -251,8 +251,256 @@ Response:
 
 La cuenta ingresada no corresponde a la cuenta de comercio
 
+/// FlexiPay responded that idCuenta field should be 83 instead of 82 and that is the only difference, so we try this:
+
+curl --location 'https://tran-dev.flexipay.com.co/api/transaccion/comercio-transaccion-comercio' \
+--header 'apiKeyComercio: 92977913-7673-4155-a7c3-75b4aa23718f' \
+--header 'usuarioComercio: INFOFINTECHTEST1' \
+--header 'contrasenaComercio: OTAxNzY2NzU3MXQ=' \
+--header 'terminalComercio: 000BB6C8' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "anoTarjetaComercio": 2026,
+    "mesTarjetaComercio": 5,
+    "numeroTarjetaComercio": "4000100000000000",
+    "idFranquiciaComercio": "9|01|Visa",
+    "cvv2": "",
+    "ciudadPagoComercio": "Cali Colombia",
+    "codreferenciaPagoComercio": "c2b95692",
+    "compradorPagoComercio": "Jane Jones",
+    "descripcionPagoComercio": "Buy BTC 0.0003213",
+    "emailCompraComercio": "mailto:donnak.bates@sbcglobal.net",
+    "idCuenta": 83,
+    "idMedioPagoComercio": 353,
+    "idTipoCuenta": "345|C|Credito",
+    "idTipoDocumentoComercio": 521,
+    "idTipoTransaccionComercio": "339|CREDIBANCO|CREDIBANCO",
+    "ivaPagoComercio": 0,
+    "mcc": "mcc de validacion que se llenara con datos de visa",
+    "montoPagoComercio": "92.00",
+    "numcuotasPagoComercio": 0,
+    "numeroDocumentoCompraComercio": "9780",
+    "numeroFacturaComercio": "9780",
+    "telefonoCompraComercio": "8178255325",
+    "valorTotalComercio": 92.00
+}'
+
+
+//Response (success)
+
+{"numAutorizacion":"704162","msgResp":"00","numRecibo":"66228476","idTransacionComercio":6553,"mensajeRespuesta":"Aprobado - 00 - Aprobada"}
+
+-------------------------
+
+in the past curl failed to verify the legitimacy of the server and therefore could not
+establish a secure connection to it. To learn more about this situation and
+how to fix it, please visit the webpage mentioned above.
+
+-k/--insecure
+
+curl  --insecure  --location 'https://tran-dev.flexipay.com.co/api/transaccion/comercio-transaccion-comercio' \
+--header 'apiKeyComercio: 92977913-7673-4155-a7c3-75b4aa23718f' \
+--header 'usuarioComercio: INFOFINTECHTEST1' \
+--header 'contrasenaComercio: OTAxNzY2NzU3MXQ=' \
+--header 'terminalComercio: 000BB6C8' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "anoTarjetaComercio": 2026,
+    "mesTarjetaComercio": 5,
+    "numeroTarjetaComercio": "4000100000000000",
+    "idFranquiciaComercio": "9|01|Visa",
+    "cvv2": "",
+    "ciudadPagoComercio": "Cali Colombia",
+    "codreferenciaPagoComercio": "c2b95692",
+    "compradorPagoComercio": "Jane Jones",
+    "descripcionPagoComercio": "Buy BTC 0.0003213",
+    "emailCompraComercio": "mailto:donnak.bates@sbcglobal.net",
+    "idCuenta": 83,
+    "idMedioPagoComercio": 353,
+    "idTipoCuenta": "345|C|Credito",
+    "idTipoDocumentoComercio": 521,
+    "idTipoTransaccionComercio": "339|CREDIBANCO|CREDIBANCO",
+    "ivaPagoComercio": 0,
+    "mcc": "mcc de validacion que se llenara con datos de visa",
+    "montoPagoComercio": "92.00",
+    "numcuotasPagoComercio": 0,
+    "numeroDocumentoCompraComercio": "9780",
+    "numeroFacturaComercio": "9780",
+    "telefonoCompraComercio": "8178255325",
+    "valorTotalComercio": 92.00
+}'
+
+Response: 
+Connection is not available, request timed out after 30000ms.
+
+----- More tries --------
+
+---- URL https://tran-dev.flexipay.com.co/api/transaccion
+Content-Type application/json
+apiKeyComercio a34b56d4-07a2-40a1-80e6-63f44d1fa0e4
+usuarioComercio INFOFINTECH
+contrasenaComercio MTAyOTM5MjgxMjBh
+terminalComercio 00004451
+
+idCuenta = 75
+
+
+
+curl  --insecure  --location 'https://tran-dev.flexipay.com.co/api/transaccion' \
+--header 'apiKeyComercio: a34b56d4-07a2-40a1-80e6-63f44d1fa0e4' \
+--header 'usuarioComercio: INFOFINTECH' \
+--header 'contrasenaComercio: MTAyOTM5MjgxMjBh' \
+--header 'terminalComercio: 00004451' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "anoTarjetaComercio": 2026,
+    "mesTarjetaComercio": 5,
+    "numeroTarjetaComercio": "4000100000000000",
+    "idFranquiciaComercio": "9|01|Visa",
+    "cvv2": "",
+    "ciudadPagoComercio": "Cali Colombia",
+    "codreferenciaPagoComercio": "c2b95692",
+    "compradorPagoComercio": "Jane Jones",
+    "descripcionPagoComercio": "Buy BTC 0.0003213",
+    "emailCompraComercio": "mailto:donnak.bates@sbcglobal.net",
+    "idCuenta": 75,
+    "idMedioPagoComercio": 353,
+    "idTipoCuenta": "345|C|Credito",
+    "idTipoDocumentoComercio": 521,
+    "idTipoTransaccionComercio": "339|CREDIBANCO|CREDIBANCO",
+    "ivaPagoComercio": 0,
+    "mcc": "mcc de validacion que se llenara con datos de visa",
+    "montoPagoComercio": "92.00",
+    "numcuotasPagoComercio": 0,
+    "numeroDocumentoCompraComercio": "9780",
+    "numeroFacturaComercio": "9780",
+    "telefonoCompraComercio": "8178255325",
+    "valorTotalComercio": 92.00
+}'
+
+Response:
+{"timestamp":"2025-12-03T20:01:01.001+00:00","status":404,"error":"Not Found","message":"","path":"/api/transaccion"}%
+
+--- Let's try other suggestions form flexipay ------
+
+
+URL https://tran-dev.flexipay.com.co/api/transaccion
+Content-Type application/json
+apiKeyComercio 3a007c2f-dc90-4e23-ada8-e8d43e18681d
+usuarioComercio FLUME8
+contrasenaComercio OTAxNzU1NzY2OGU=
+terminalComercio 34862
+
+idCuenta: 82
+
+curl   --location 'https://tran-dev.flexipay.com.co/api/transaccion' \
+--header 'apiKeyComercio: 3a007c2f-dc90-4e23-ada8-e8d43e18681d' \
+--header 'usuarioComercio: FLUME8' \
+--header 'contrasenaComercio: OTAxNzU1NzY2OGU=' \
+--header 'terminalComercio: 34862' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "anoTarjetaComercio": 2026,
+    "mesTarjetaComercio": 5,
+    "numeroTarjetaComercio": "4000100000000000",
+    "idFranquiciaComercio": "9|01|Visa",
+    "cvv2": "",
+    "ciudadPagoComercio": "Cali Colombia",
+    "codreferenciaPagoComercio": "c2b95692",
+    "compradorPagoComercio": "Jane Jones",
+    "descripcionPagoComercio": "Buy BTC 0.0003213",
+    "emailCompraComercio": "mailto:donnak.bates@sbcglobal.net",
+    "idCuenta": 82,
+    "idMedioPagoComercio": 353,
+    "idTipoCuenta": "345|C|Credito",
+    "idTipoDocumentoComercio": 521,
+    "idTipoTransaccionComercio": "339|CREDIBANCO|CREDIBANCO",
+    "ivaPagoComercio": 0,
+    "mcc": "mcc de validacion que se llenara con datos de visa",
+    "montoPagoComercio": "92.00",
+    "numcuotasPagoComercio": 0,
+    "numeroDocumentoCompraComercio": "9780",
+    "numeroFacturaComercio": "9780",
+    "telefonoCompraComercio": "8178255325",
+    "valorTotalComercio": 92.00
+}'
+
 
 ========================================================
+========================================================
+
+Example as per FlexiPay with Production credentials (per file flexipay_prod_creds.pdf)
+
+URL https://api.flexipay.com.co/transact/api/transaccion/
+Content-Type: application/json
+apiKeyComercio: 00a6eb00-9373-4992-b7bb-c38bec113054
+usuarioComercio: INFOFINTECHMOVII7
+contrasenaComercio: OTAxNzY2NzU3N2k=
+terminalComercio: 21033
+
+BODY
+idCuenta: 135
+
+
+
+VIRTUAL TERMINAL CREDENTIALS
+URL: https://www.flexipay.com.co/p/landing-page
+Username: infofintech-movii
+Password: ASzexGqC4%
+
+========================================================
+
+// possibly add --insecure before location in case there is a certificate error 
+
+curl  --insecure --location 'https://api.flexipay.com.co/transact/api/transaccion/' \
+--header 'apiKeyComercio: 00a6eb00-9373-4992-b7bb-c38bec113054' \
+--header 'usuarioComercio: INFOFINTECHMOVII7' \
+--header 'contrasenaComercio: OTAxNzY2NzU3N2k=' \
+--header 'terminalComercio: 21033' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "anoTarjetaComercio": 2026,
+    "mesTarjetaComercio": 5,
+    "numeroTarjetaComercio": "4000100000000000",
+    "idFranquiciaComercio": "9|01|Visa",
+    "cvv2": "123",
+    "ciudadPagoComercio": "Cali Colombia",
+    "codreferenciaPagoComercio": "c2b95692",
+    "compradorPagoComercio": "Jane Jones",
+    "descripcionPagoComercio": "Buy BTC 0.0003213",
+    "emailCompraComercio": "mailto:donnak.bates@sbcglobal.net",
+    "idCuenta": 135,
+    "idMedioPagoComercio": 353,
+    "idTipoCuenta": "345|C|Credito",
+    "idTipoDocumentoComercio": 521,
+    "idTipoTransaccionComercio": "339|CREDIBANCO|CREDIBANCO",
+    "ivaPagoComercio": 0,
+    "mcc": "mcc de validacion que se llenara con datos de visa",
+    "montoPagoComercio": "92.00",
+    "numcuotasPagoComercio": 0,
+    "numeroDocumentoCompraComercio": "9780",
+    "numeroFacturaComercio": "9780",
+    "telefonoCompraComercio": "8178255325",
+    "valorTotalComercio": 92.00
+}'
+
+//Response:
+{"message":"Missing Authentication Token"}%
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==========================================================
 
 
 Example request:
@@ -332,4 +580,3 @@ curl  --request POST  --insecure  --url https://67.254.128.64/auth_flexi_map_and
     "key_1": "val_1",
     "key_2": "val_2"
 }'
-
