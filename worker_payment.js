@@ -52,29 +52,24 @@ async function do_trx(workerParams) {
         // });
         // const data = await response.json();
 
-        payLoad.anoTarjetaComercio = "2026"
-        payLoad.mesTarjetaComercio = "5"
+        const expiration_parts = argReqBody.createTransactionRequest.transactionRequest.payment.creditCard.expirationDate.split('-');
+        const expiration_month = expiration_parts[1];
+        const expiration_year = expiration_parts[0];
+
+        payLoad.anoTarjetaComercio = expiration_year
+        payLoad.mesTarjetaComercio = expiration_month
         payLoad.numeroTarjetaComercio = argReqBody.createTransactionRequest.transactionRequest.payment.creditCard.cardNumber
-        payLoad.idFranquiciaComercio = "9|01|Visa"
+        if (argReqBody.createTransactionRequest.transactionRequest.payment.creditCard.cardNumber[0] != '4'){
+            logIt('Card type is not Visa')
+        }
+        payLoad.idFranquiciaComercio = "9"
         payLoad.cvv2 = argReqBody.createTransactionRequest.transactionRequest.payment.creditCard.cardCode
-        payLoad.ciudadPagoComercio = "Cali Colombia"
-        payLoad.codreferenciaPagoComercio = "c2b95692"
-        payLoad.compradorPagoComercio = "Jane Jones"
-        payLoad.descripcionPagoComercio = "Buy BTC 0.0003213"
-        payLoad.emailCompraComercio = "mailto:donnak.bates@sbcglobal.net"
         payLoad.idCuenta = workerParams.credentials.idCuenta
-        payLoad.idMedioPagoComercio = "353"
         payLoad.idTipoCuenta = "345|C|Credito"
         payLoad.idTipoDocumentoComercio = "521"
-        payLoad.idTipoTransaccionComercio = "339|CREDIBANCO|CREDIBANCO"
+        payLoad.idTipoTransaccionComercio = "339"
         payLoad.ivaPagoComercio = "0"
-        payLoad.mcc = "mcc de validacion que se llenara con datos de visa"
-        payLoad.montoPagoComercio = "92.00"
-        payLoad.numcuotasPagoComercio = "0"
-        payLoad.numeroDocumentoCompraComercio = "9780"
-        payLoad.numeroFacturaComercio = "9780"
-        payLoad.telefonoCompraComercio = "8178255325"
-        payLoad.valorTotalComercio = "92.00"
+        payLoad.montoPagoComercio = argReqBody.createTransactionRequest.transactionRequest.amount
 
         const response = await fetch(`https://tran-dev.flexipay.com.co/api/transaccion/comercio-transaccion-comercio`, {
             method: "POST",

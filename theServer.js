@@ -24,7 +24,7 @@ const fs = require('fs');
 const { Worker } = require("worker_threads");
 
 const app = express();
-let secPort = 443;
+let secPort = 8443;
 
 let locallMoment = new Date(Date.now() - ((new Date()).getTimezoneOffset() * 60000)).toISOString().split("T")[0];
 let logger = fs.createWriteStream(`./logs/log_${locallMoment}.log`, { flags: 'a' /* 'a' for appending  */});

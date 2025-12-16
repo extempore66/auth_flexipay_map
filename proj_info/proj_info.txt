@@ -263,7 +263,7 @@ curl --location 'https://tran-dev.flexipay.com.co/api/transaccion/comercio-trans
     "anoTarjetaComercio": 2026,
     "mesTarjetaComercio": 5,
     "numeroTarjetaComercio": "4000100000000000",
-    "idFranquiciaComercio": "9|01|Visa",
+    "idFranquiciaComercio": "9",
     "cvv2": "123",
     "ciudadPagoComercio": "Cali Colombia",
     "codreferenciaPagoComercio": "c2b95692",
@@ -515,7 +515,7 @@ curl  --request POST  --url https://tran-dev.flexipay.com.co/api/transaccion/com
     "anoTarjetaComercio": 2026,
     "mesTarjetaComercio": 5,
     "numeroTarjetaComercio": "4000100000000000",
-    "idFranquiciaComercio": "9|01|Visa",
+    "idFranquiciaComercio": "Visa",
     "cvv2": "",
     "ciudadPagoComercio": "Cali Colombia",
     "codreferenciaPagoComercio": "c2b95692",
@@ -561,6 +561,33 @@ like idTipoCuenta or idMedioPagoComercio or idCuenta or codreferenciaPagoComerci
 Must talk to Bryan and sort out the value of these fields for each client or for Bryan as a Merchant
 
 
+Minimum successful transaction:
+
+curl --location 'https://tran-dev.flexipay.com.co/api/transaccion/comercio-transaccion-comercio' \
+--header 'apiKeyComercio: 92977913-7673-4155-a7c3-75b4aa23718f' \
+--header 'usuarioComercio: INFOFINTECHTEST1' \
+--header 'contrasenaComercio: OTAxNzY2NzU3MXQ=' \
+--header 'terminalComercio: 000BB6C8' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "anoTarjetaComercio": 2026,
+    "mesTarjetaComercio": 5,
+    "numeroTarjetaComercio": "4000100000000000",
+    "idFranquiciaComercio": "9",
+    "cvv2": "123",
+    "idCuenta": 83,
+    "idTipoCuenta": "345|C|Credito",
+    "idTipoDocumentoComercio": 521,
+    "idTipoTransaccionComercio": "339",
+    "ivaPagoComercio": 0,
+    "montoPagoComercio": "92.00"
+}'
+
+Response:
+
+{"numAutorizacion":"520452","msgResp":"00","numRecibo":"41937152","idTransacionComercio":6631,"mensajeRespuesta":"Aprobado - 00 - Aprobada"}
+
+
 
 =====================================================================================
 
@@ -582,7 +609,7 @@ curl  --request POST  --insecure  --url https://67.254.128.64/auth_flexi_map_and
 }'
 
 
-curl  --request POST  --insecure  --url https://localhost/auth_flexi_map_and_pay \
+curl  --request POST  --insecure  --url https://localhost:8443/auth_flexi_map_and_pay \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "createTransactionRequest": {
@@ -598,4 +625,5 @@ curl  --request POST  --insecure  --url https://localhost/auth_flexi_map_and_pay
         }
     }
 }' 
+
 
